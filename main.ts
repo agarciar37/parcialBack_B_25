@@ -74,7 +74,7 @@ const handler = async (request: Request): Promise<Response> => {
     if (path === "/libro") {
       const body = await request.json();
       const { title, authors, numberOfCopies } = body;
-      if (!title || !authors) {
+      if (!title || !Array.isArray(authors) || authors.length === 0) {
         return new Response(
           JSON.stringify({
             error: "El título y los autores son campos requeridos.",
